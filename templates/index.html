@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Data Analysis App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to the Breast Cancer Data Analysis App</h1>
+        <nav>
+            <ul>
+                <li><a href="/dataframe_info">View DataFrame Info</a></li>
+                <li><a href="/plot_column_distribution">Plot Column Distributions</a></li>
+                <li><a href="/plot_correlation">View Correlation Matrix</a></li>
+                <li><a href="/plot_scatter_density">Plot Scatter & Density</a></li>
+                {% if model_trained %}
+                <li><a href="/predict">Predict Cancer Type</a></li>
+                {% else %}
+                <li><span style="color: #999;">Predict Cancer Type (Model Not Ready)</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% if not data_loaded %}
+        <p style="color: red; margin-top: 20px;">
+            <strong>Warning:</strong> Data file 'data.csv' was not found or could not be loaded.
+            Some functionalities (like plotting and prediction) may not work correctly.
+            Please ensure 'data.csv' is in the 'data' directory next to 'app.py'.
+        </p>
+        {% elif model_trained %}
+        <p style="margin-top: 20px;">
+            <strong>Prediction Model In Use:</strong> {{ best_model_name }} (Accuracy: {{ best_model_accuracy }})
+        </p>
+        {% else %}
+        <p style="color: orange; margin-top: 20px;">
+            <strong>Warning:</strong> Model training failed. Check server logs for details. Prediction functionality may
+            not work.
+        </p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

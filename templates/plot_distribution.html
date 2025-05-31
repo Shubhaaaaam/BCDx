@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plot Column Distribution</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Plot Column Distribution</h1>
+        <form method="POST" action="/plot_column_distribution">
+            <label for="column_name">Select Column:</label>
+            <select name="column_name" id="column_name">
+                {% for col in column_names %}
+                <option value="{{ col }}" {% if col==selected_column %}selected{% endif %}>{{ col }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Generate Plot</button>
+        </form>
+        {% if plot_data %}
+        <h2>Distribution Plot for {{ selected_column }}</h2>
+        <img src="data:image/png;base64,{{ plot_data }}" alt="Distribution Plot">
+        {% elif selected_column %}
+        <p>Could not generate plot for "{{ selected_column }}". Please check column type or data.</p>
+        {% endif %}
+        <p><a href="/">Back to Home</a></p>
+    </div>
+</body>
+
+</html>

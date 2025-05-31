@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Density Plot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Scatter Density Plot</h1>
+        <p><a href="/">Back to Home</a></p>
+        {% if data_loaded %}
+        <form method="POST" action="{{ url_for('plot_scatter_density_route') }}" class="form-select">
+            <label for="column_name_1">Select First Column:</label>
+            <select name="column_name_1" id="column_name_1">
+                {% for col in column_names %}
+                <option value="{{ col }}" {% if selected_col1==col %}selected{% endif %}>{{ col }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="column_name_2">Select Second Column:</label>
+            <select name="column_name_2" id="column_name_2">
+                {% for col in column_names %}
+                <option value="{{ col }}" {% if selected_col2==col %}selected{% endif %}>{{ col }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Generate Plot</button>
+        </form>
+
+        {% if plot_data %}
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ plot_data }}" alt="Scatter Density Plot">
+        </div>
+        {% elif selected_col1 and selected_col2 %}
+        <p>Could not generate plot for the selected columns. Please ensure they are numerical and valid.</p>
+        {% else %}
+        <p>Select two numerical columns and click "Generate Plot" to see the scatter density plot.</p>
+        {% endif %}
+        {% else %}
+        <p>Data not loaded. Please ensure 'data.csv' is in the 'data' directory and the application has started
+            correctly.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

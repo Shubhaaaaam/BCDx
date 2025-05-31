@@ -1,0 +1,193 @@
+:root {
+    --bg-dark: #1a1a2e;
+    --bg-medium: #1f283e;
+    --text-light: #e0e0e0;
+    --text-medium: #b0b0b0;
+    --accent-blue: #007bff;
+    --accent-blue-hover: #0056b3;
+    --border-dark: #333d52;
+    --highlight-green: #28a745;
+    --highlight-red: #dc3545;
+    --pre-bg: #2d2d44;
+    --input-bg: #28283e;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--bg-medium);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    color: var(--accent-blue);
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-dark);
+    padding-bottom: 15px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-dark);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 30px auto;
+    border: 1px solid var(--border-dark);
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+pre {
+    background-color: var(--pre-bg);
+    padding: 15px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    color: var(--text-light);
+    border: 1px solid var(--border-dark);
+    overflow-x: auto;
+}
+
+p {
+    margin-bottom: 15px;
+    color: var(--text-medium);
+}
+
+.form-select {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+    padding: 20px;
+    background-color: var(--pre-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-dark);
+}
+
+.form-select label {
+    font-weight: bold;
+    color: var(--text-light);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-select select,
+.form-select input[type="text"] {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-dark);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-light);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-select select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23e0e0e0' d='M5 7l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+    padding-right: 30px;
+}
+
+
+.form-select button {
+    background-color: var(--accent-blue);
+    color: var(--text-light);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: center;
+    min-width: 150px;
+    margin-top: 10px;
+}
+
+.form-select button:hover {
+    background-color: var(--accent-blue-hover);
+    transform: translateY(-2px);
+}
+
+.prediction-result {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--pre-bg);
+    color: var(--highlight-green);
+    border: 1px solid var(--highlight-green);
+}
+
+.error-message {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(220, 53, 69, 0.2);
+    color: var(--highlight-red);
+    border: 1px solid var(--highlight-red);
+}
+
+.plot-container {
+    text-align: center;
+    margin-top: 30px;
+}
+a {
+    text-decoration: none;
+}

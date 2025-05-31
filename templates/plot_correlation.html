@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation Matrix</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Correlation Matrix</h1>
+        <p><a href="/">Back to Home</a></p>
+        {% if data_loaded %}
+        {% if plot_data %}
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ plot_data }}" alt="Correlation Matrix Plot">
+        </div>
+        {% else %}
+        <p>No numerical data available to plot a correlation matrix, or an error occurred during plotting. Please check
+            your dataset.</p>
+        {% endif %}
+        {% else %}
+        <p>Data not loaded. Please ensure 'data.csv' is in the 'data' directory and the application has started
+            correctly.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .prediction-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .result-malignant {
+            background-color: #ffe0e0;
+            color: #d32f2f;
+            border: 1px solid #d32f2f;
+        }
+
+        .result-benign {
+            background-color: #e8f5e9;
+            color: #388e3c;
+            border: 1px solid #388e3c;
+        }
+
+        .error-message {
+            color: red;
+            background-color: #ffebee;
+            border: 1px solid #ef9a9a;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Predict Cancer Type</h1>
+        <p><a href="/">Back to Home</a></p>
+
+        {% if not model_trained %}
+        <p class="error-message">{{ error_message }}</p>
+        <p>The prediction model could not be trained. This usually happens if 'data.csv' is missing or has an unexpected
+            format. Please ensure 'data.csv' is correctly placed in the 'data' directory and contains the 'diagnosis'
+            column.</p>
+        {% else %}
+        {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+
+        <p>Enter the patient's measurements below to predict if the cancer is Malignant or Benign.</p>
+        <form method="POST" action="/predict">
+            {% for feature in feature_columns %}
+            <div class="form-group">
+                <label for="{{ feature }}">{{ feature.replace('_', ' ').title() }}:</label>
+                <input type="number" step="any" id="{{ feature }}" name="{{ feature }}" required>
+            </div>
+            {% endfor %}
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_result %}
+        <div
+            class="prediction-result {% if 'Malignant' in prediction_result %}result-malignant{% else %}result-benign{% endif %}">
+            <h2>Prediction: {{ prediction_result }}</h2>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</body>
+
+</html>
